@@ -1,29 +1,39 @@
 import { useState, useEffect } from "react";
 import * as d3 from "d3";
 import csvFile from "./data/military_expenditure.csv";
+import DatesRangeSlider from "./components/DatesRangeSlider";
 
 function App() {
   const [data, setData] = useState([]);
-  
+  const [datesRange, setDatesRange] = useState([1960, 1960]);
+
   useEffect(() => {
-    d3.csv(csvFile).then(rawData => {
-      setData(rawData.map(item => {
-        const { Code: code, Name: label, Type, "Indicator Name": indicatorName, ...dates } = item;
-        return {
-          code: item.Code,
-          label: item.Name,
-          values: Object.keys(dates).map(key => ({
-            date: key,
-            value: parseFloat(dates[key] || 0)
-          }))
-        }
-      }));
+    d3.csv(csvFile).then((rawData) => {
+      setData(
+        rawData.map((item) => {
+          const {
+            Code: code,
+            Name: label,
+            Type,
+            "Indicator Name": indicatorName,
+            ...dates
+          } = item;
+          return {
+            code: item.Code,
+            label: item.Name,
+            values: Object.keys(dates).map((key) => ({
+              date: key,
+              value: parseFloat(dates[key] || 0),
+            })),
+          };
+        })
+      );
     });
   }, []);
 
-  return (  
+  return (
     <div className="App">
-      Foo
+      <DatesRangeSlider updater={setDatesRange} />
     </div>
   );
 }
