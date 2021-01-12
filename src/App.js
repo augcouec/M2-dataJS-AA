@@ -61,6 +61,7 @@ const updateDataRange = (data, datesRange) => {
 };
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
 
@@ -70,6 +71,7 @@ function App() {
       const computedData = computeData(formattedData);
       setData(computedData);
       setCurrentData(computedData);
+      setLoading(false);
     });
   }, []);
 
@@ -86,9 +88,15 @@ function App() {
 
   return (
     <div className="app">
-      <DatesRangeSlider updater={updateDatesRange} />
-      <TotalWorldExpense data={currentData} />
-      <GeoChart data={currentData} updater={selectCountry} />
+      {loading ? (
+        <div className="loader">Chargment...</div>
+      ) : (
+        <>
+          <DatesRangeSlider updater={updateDatesRange} />
+          <TotalWorldExpense data={currentData} />
+          <GeoChart data={currentData} updater={selectCountry} />
+        </>
+      )}
     </div>
   );
 }
