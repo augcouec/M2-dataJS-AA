@@ -89,7 +89,7 @@ function App() {
   return (
     <div className="app">
       {loading ? (
-        <div className="loader">Chargment...</div>
+        <div className="loader">Loading...</div>
       ) : (
         <>
           <DatesRangeSlider updater={updateDatesRange} />
