@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import * as d3 from "d3";
 import csvFile from "./data/military_expenditure.csv";
 import DatesRangeSlider from "./components/DatesRangeSlider";
+import GeoChart from "./components/GeoChart";
 
 const formatData = (rawData) => {
   return rawData.map((item) => {
@@ -77,8 +78,9 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="app">
       <DatesRangeSlider updater={updateDatesRange} />
+      <GeoChart data={currentData} />
     </div>
   );
 }
