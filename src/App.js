@@ -77,10 +77,15 @@ function App() {
     setCurrentData(computedData);
   };
 
+  const selectCountry = (event) => {
+    const countryCode = event.data.id;
+    console.log(countryCode);
+  };
+
   return (
     <div className="app">
       <DatesRangeSlider updater={updateDatesRange} />
-      <GeoChart data={currentData} />
+      <GeoChart data={currentData} updater={selectCountry} />
     </div>
   );
 }
