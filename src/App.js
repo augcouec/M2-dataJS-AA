@@ -4,6 +4,7 @@ import csvFile from "./data/military_expenditure.csv";
 import DatesRangeSlider from "./components/DatesRangeSlider";
 import TotalWorldExpense from "./components/TotalWorldExpense";
 import GeoChart from "./components/GeoChart";
+import BarChart from "./components/BarChart";
 
 const formatData = (rawData) => {
   return rawData.map((item) => {
@@ -64,6 +65,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
+  const [selectedCountries, setSelectedCountries] = useState([]);
 
   useEffect(() => {
     d3.csv(csvFile).then((csv) => {
@@ -82,8 +84,15 @@ function App() {
   };
 
   const selectCountry = (event) => {
+    if (!event.data) return;
     const countryCode = event.data.id;
-    console.log(countryCode);
+    if (selectedCountries.includes(countryCode)) {
+      const selectedCountriesClone = [...selectedCountries];
+      selectedCountriesClone.splice(selectedCountries.indexOf(countryCode), 1);
+      setSelectedCountries(selectedCountriesClone);
+    } else {
+      setSelectedCountries([...selectedCountries, countryCode]);
+    }
   };
 
   return (
@@ -94,7 +103,13 @@ function App() {
         <>
           <DatesRangeSlider updater={updateDatesRange} />
           <TotalWorldExpense data={currentData} />
-          <GeoChart data={currentData} updater={selectCountry} />
+          <section className="charts">
+            <GeoChart data={currentData} updater={selectCountry} />
+            <BarChart
+              data={currentData}
+              selectedCountries={selectedCountries}
+            />
+          </section>
         </>
       )}
     </div>

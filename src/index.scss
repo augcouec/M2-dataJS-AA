@@ -50,7 +50,18 @@ body {
   }
 }
 
-.geo-chart {
-  width: 50vw;
-  height: 70vh;
+.charts {
+  display: flex;
+  justify-content: space-between;
+  .geo-chart {
+    width: 50vw;
+    height: 70vh;
+  }
+  
+  .bar-chart {
+    width: 40vw;
+    height: 40vh;
+  }
 }
+
+
