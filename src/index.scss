@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.app {
+  margin: 1rem;
+}
+
+.dates-range {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0 0;
+
+  &__dates {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__date {
+    padding: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .rc-slider {
+    width: 50%;
+  }
+}
+
+.geo-chart {
+  width: 50vw;
+  height: 70vh;
+}
