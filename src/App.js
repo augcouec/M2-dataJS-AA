@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import * as d3 from "d3";
 import csvFile from "./data/military_expenditure.csv";
 import DatesRangeSlider from "./components/DatesRangeSlider";
+import TotalWorldExpense from "./components/TotalWorldExpense";
 import GeoChart from "./components/GeoChart";
 
 const formatData = (rawData) => {
@@ -52,7 +53,8 @@ const computeData = (data) => {
 const updateDataRange = (data, datesRange) => {
   return data.map((country) => {
     const expenses = country.expenses.filter(
-      (expense) => expense.date > datesRange[0] && expense.date < datesRange[1]
+      (expense) =>
+        expense.date >= datesRange[0] && expense.date <= datesRange[1]
     );
     return { ...country, expenses };
   });
@@ -85,6 +87,7 @@ function App() {
   return (
     <div className="app">
       <DatesRangeSlider updater={updateDatesRange} />
+      <TotalWorldExpense data={currentData} />
       <GeoChart data={currentData} updater={selectCountry} />
     </div>
   );
