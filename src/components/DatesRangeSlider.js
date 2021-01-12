@@ -25,6 +25,7 @@ function DatesRangeSlider(props) {
       />
       <div className="dates-range__dates">
         <span className="dates-range__date">{datesRange[0]}</span>
+        <span className="dates-range__date">-</span>
         <span className="dates-range__date">{datesRange[1]}</span>
       </div>
     </div>
