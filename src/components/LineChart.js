@@ -25,30 +25,34 @@ function LineChart(props) {
 
   return (
     <div className="chart line-chart">
-      <ResponsiveLine
-        data={data}
-        colors={(d) => d.color}
-        margin={{ top: 30, right: 40, bottom: 60, left: 80 }}
-        xScale={{ type: "point" }}
-        yScale={{
-          type: "linear",
-          min: 0,
-          max: "auto",
-        }}
-        axisTop={null}
-        axisRight={null}
-        axisBottom={{
-          tickSize: 0,
-          tickPadding: 15,
-          tickRotation: -90,
-        }}
-        axisLeft={{
-          tickSize: 0,
-          tickPadding: 15,
-          tickRotation: 0,
-        }}
-        useMesh={true}
-      />
+      {data.length ? (
+        <ResponsiveLine
+          data={data}
+          colors={(d) => d.color}
+          margin={{ top: 30, right: 40, bottom: 60, left: 80 }}
+          xScale={{ type: "point" }}
+          yScale={{
+            type: "linear",
+            min: 0,
+            max: "auto",
+          }}
+          axisTop={null}
+          axisRight={null}
+          axisBottom={{
+            tickSize: 0,
+            tickPadding: 15,
+            tickRotation: -90,
+          }}
+          axisLeft={{
+            tickSize: 0,
+            tickPadding: 15,
+            tickRotation: 0,
+          }}
+          useMesh={true}
+        />
+      ) : (
+        <p>Select countries on map</p>
+      )}
     </div>
   );
 }

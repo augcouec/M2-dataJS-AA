@@ -23,25 +23,29 @@ function BarChart(props) {
 
   return (
     <div className="chart bar-chart">
-      <ResponsiveBar
-        data={data}
-        colors={(d) => d.data.color}
-        keys={["spending"]}
-        indexBy="country"
-        margin={{ top: 30, right: 40, bottom: 45, left: 80 }}
-        padding={0.3}
-        axisBottom={{
-          tickSize: 0,
-          tickPadding: 15,
-          tickRotation: 0,
-        }}
-        axisLeft={{
-          tickSize: 0,
-          tickPadding: 15,
-          tickRotation: 0,
-        }}
-        labelSkipHeight={10}
-      />
+      {data.length ? (
+        <ResponsiveBar
+          data={data}
+          colors={(d) => d.data.color}
+          keys={["spending"]}
+          indexBy="country"
+          margin={{ top: 30, right: 40, bottom: 45, left: 80 }}
+          padding={0.3}
+          axisBottom={{
+            tickSize: 0,
+            tickPadding: 15,
+            tickRotation: 0,
+          }}
+          axisLeft={{
+            tickSize: 0,
+            tickPadding: 15,
+            tickRotation: 0,
+          }}
+          labelSkipHeight={10}
+        />
+      ) : (
+        <p>Select countries on map</p>
+      )}
     </div>
   );
 }
