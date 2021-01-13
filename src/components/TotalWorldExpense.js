@@ -9,7 +9,7 @@ function TotalWorldExpense(props) {
         Total spending in the world
       </span>
       <span className="total-world-expense__value">
-        ${Math.round(worldTotal / 1000000000)} billions
+        $ {(worldTotal / 1000000000).toFixed(2)} billions
       </span>
     </div>
   );

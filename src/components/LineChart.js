@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { ResponsiveBar } from "@nivo/bar";
+import { ResponsiveLine } from "@nivo/line";
 
-function BarChart(props) {
+function LineChart(props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -10,40 +10,47 @@ function BarChart(props) {
           .filter((country) =>
             props.selectedCountries.find((c) => c.code === country.code)
           )
-          .sort((a, b) => (a.total > b.total ? 1 : -1))
           .map((country) => ({
-            country: country.label,
-            spending: (country.total / 1000000000).toFixed(2),
+            id: country.label,
             color: props.selectedCountries.find((c) => c.code === country.code)
               .color,
+            data: country.expenses.map((expense) => ({
+              x: expense.date,
+              y: (expense.value / 1000000000).toFixed(2),
+            })),
           }))
       : [];
     setData(formattedData);
   }, [props.data, props.selectedCountries]);
 
   return (
-    <div className="chart bar-chart">
-      <ResponsiveBar
+    <div className="chart line-chart">
+      <ResponsiveLine
         data={data}
-        colors={(d) => d.data.color}
-        keys={["spending"]}
-        indexBy="country"
-        margin={{ top: 30, right: 40, bottom: 45, left: 80 }}
-        padding={0.3}
+        colors={(d) => d.color}
+        margin={{ top: 30, right: 40, bottom: 60, left: 80 }}
+        xScale={{ type: "point" }}
+        yScale={{
+          type: "linear",
+          min: 0,
+          max: "auto",
+        }}
+        axisTop={null}
+        axisRight={null}
         axisBottom={{
           tickSize: 0,
           tickPadding: 15,
-          tickRotation: 0,
+          tickRotation: -90,
         }}
         axisLeft={{
           tickSize: 0,
           tickPadding: 15,
           tickRotation: 0,
         }}
-        labelSkipHeight={10}
+        useMesh={true}
       />
     </div>
   );
 }
 
-export default BarChart;
+export default LineChart;

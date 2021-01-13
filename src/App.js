@@ -5,6 +5,8 @@ import DatesRangeSlider from "./components/DatesRangeSlider";
 import TotalWorldExpense from "./components/TotalWorldExpense";
 import GeoChart from "./components/GeoChart";
 import BarChart from "./components/BarChart";
+import LineChart from "./components/LineChart";
+import { contourDensity } from "d3";
 
 const formatData = (rawData) => {
   return rawData.map((item) => {
@@ -85,13 +87,20 @@ function App() {
 
   const selectCountry = (event) => {
     if (!event.data) return;
+    const { color } = event;
     const countryCode = event.data.id;
-    if (selectedCountries.includes(countryCode)) {
+    const matchingIndex = selectedCountries.findIndex(
+      (country) => country.code === countryCode
+    );
+    if (matchingIndex !== -1) {
       const selectedCountriesClone = [...selectedCountries];
-      selectedCountriesClone.splice(selectedCountries.indexOf(countryCode), 1);
+      selectedCountriesClone.splice(matchingIndex, 1);
       setSelectedCountries(selectedCountriesClone);
     } else {
-      setSelectedCountries([...selectedCountries, countryCode]);
+      setSelectedCountries([
+        ...selectedCountries,
+        { code: countryCode, color },
+      ]);
     }
   };
 
@@ -101,15 +110,24 @@ function App() {
         <div className="loader">Loading...</div>
       ) : (
         <>
-          <DatesRangeSlider updater={updateDatesRange} />
-          <TotalWorldExpense data={currentData} />
-          <section className="charts">
+          <header className="app__header">
+            <DatesRangeSlider updater={updateDatesRange} />
+            <TotalWorldExpense data={currentData} />
+          </header>
+
+          <main className="app__charts">
             <GeoChart data={currentData} updater={selectCountry} />
-            <BarChart
-              data={currentData}
-              selectedCountries={selectedCountries}
-            />
-          </section>
+            <div className="app__charts__side-charts">
+              <BarChart
+                data={currentData}
+                selectedCountries={selectedCountries}
+              />
+              <LineChart
+                data={currentData}
+                selectedCountries={selectedCountries}
+              />
+            </div>
+          </main>
         </>
       )}
     </div>

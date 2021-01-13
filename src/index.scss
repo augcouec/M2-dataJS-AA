@@ -1,67 +1,113 @@
+$main-color: black;
+
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   font-family: "Helvetica Neue", sans-serif;
 }
 
 .app {
-  margin: 1rem;
+  margin: 3rem;
 }
 
-.dates-range {
+// HEADER ---------------------------------------------------------------------
+.app__header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 3rem 0 0;
+  justify-content: space-between;
 
-  &__dates {
+  .dates-range {
+    width: 50%;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    &__dates {
+      display: flex;
+      justify-content: center;
+    }
+  
+    &__date {
+      padding: 2rem 0.5rem;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .rc-slider-handle, .rc-slider-handle-2 .rc-slider-handle-dragging {
+      border-color: $main-color !important;
+      box-shadow: 0 0 0 5px rgba($main-color, 0.5) !important;
+    }
+
+    .rc-slider-track {
+      background-color: $main-color !important;
+    }
+
+    .rc-slider-mark-text {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+  }
+  
+  .total-world-expense {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  
+    &__title, &__value {
+      text-align: left;
+    }
+  
+    &__title {
+      color: grey;
+      font-size: 1.5rem;
+    }
+  
+    &__value {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+}
+
+// CHARTS ---------------------------------------------------------------------
+.app__charts {
+  display: flex;
+  justify-content: space-between;
+
+  .chart {
+    border: solid 1px lightgrey;
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
 
-  &__date {
-    padding: 2rem 0.5rem;
-    font-size: 2rem;
-    font-weight: bold;
-  }
-
-  .rc-slider {
-    width: 50%;
-  }
-}
-
-.total-world-expense {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-
-  &__title, &__value {
-    text-align: left;
-  }
-
-  &__title {
-    color: grey;
-    font-size: 1.5rem;
-  }
-
-  &__value {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-}
-
-.charts {
-  display: flex;
-  justify-content: space-between;
   .geo-chart {
-    width: 50vw;
-    height: 70vh;
+    height: 75vh;
+    width: calc(50% - 1rem);
+    margin-right: 1rem;
   }
-  
-  .bar-chart {
-    width: 40vw;
-    height: 40vh;
+
+  &__side-charts {
+    height: 75vh;
+    width: calc(50% - 1rem);
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    .bar-chart, .line-chart {
+      width: 100%;
+      height: 50%;
+    }
+
+    .line-chart {
+      margin-top: 2rem;
+    }
   }
+
 }
 
 
