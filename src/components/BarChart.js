@@ -24,27 +24,34 @@ function BarChart(props) {
   return (
     <div className="chart bar-chart">
       {data.length ? (
-        <ResponsiveBar
-          data={data}
-          colors={(d) => d.data.color}
-          keys={["spending"]}
-          indexBy="country"
-          margin={{ top: 30, right: 40, bottom: 45, left: 80 }}
-          padding={0.3}
-          axisBottom={{
-            tickSize: 0,
-            tickPadding: 15,
-            tickRotation: 0,
-          }}
-          axisLeft={{
-            tickSize: 0,
-            tickPadding: 15,
-            tickRotation: 0,
-          }}
-          labelSkipHeight={10}
-        />
+        <>
+          <h2 className="chart__title">
+            Total spending by country (billion $)
+          </h2>
+          <ResponsiveBar
+            data={data}
+            colors={(d) => d.data.color}
+            keys={["spending"]}
+            indexBy="country"
+            margin={{ top: 30, right: 40, bottom: 45, left: 80 }}
+            padding={0.3}
+            axisBottom={{
+              tickSize: 0,
+              tickPadding: 15,
+              tickRotation: 0,
+            }}
+            axisLeft={{
+              tickSize: 0,
+              tickPadding: 15,
+              tickRotation: 0,
+            }}
+            labelSkipHeight={10}
+          />
+        </>
       ) : (
-        <p>Select countries on map</p>
+        <p className="chart__empty-text">
+          Select at least one country on the map
+        </p>
       )}
     </div>
   );

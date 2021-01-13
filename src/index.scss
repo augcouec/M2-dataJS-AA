@@ -80,8 +80,24 @@ body {
   .chart {
     border: solid 1px lightgrey;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+
+    &__title {
+      color: grey;
+      font-size: 1rem;
+      padding: 0 2rem;
+      font-weight: normal;
+    }
+
+    &__empty-text {
+      width: 100%;
+      text-align: center;
+    }
+
+    h2 + div {
+      height: calc(100% - 40px) !important;
+    }
   }
 
   .geo-chart {

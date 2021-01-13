@@ -6,27 +6,28 @@ import TotalWorldExpense from "./components/TotalWorldExpense";
 import GeoChart from "./components/GeoChart";
 import BarChart from "./components/BarChart";
 import LineChart from "./components/LineChart";
-import { contourDensity } from "d3";
 
 const formatData = (rawData) => {
-  return rawData.map((item) => {
-    const {
-      Code: code,
-      Name: label,
-      Type,
-      "Indicator Name": indicatorName,
-      ...dates
-    } = item;
+  return rawData
+    .filter((item) => item.Type === "Country")
+    .map((item) => {
+      const {
+        Code: code,
+        Name: label,
+        Type,
+        "Indicator Name": indicatorName,
+        ...dates
+      } = item;
 
-    const country = { code, label };
+      const country = { code, label };
 
-    country.expenses = Object.keys(dates).map((key) => ({
-      date: parseFloat(key),
-      value: parseFloat(dates[key] || 0),
-    }));
+      country.expenses = Object.keys(dates).map((key) => ({
+        date: parseFloat(key),
+        value: parseFloat(dates[key] || 0),
+      }));
 
-    return country;
-  });
+      return country;
+    });
 };
 
 const computeData = (data) => {
@@ -67,7 +68,9 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
-  const [selectedCountries, setSelectedCountries] = useState([]);
+  const [selectedCountries, setSelectedCountries] = useState([
+    { code: "WLD", color: "grey" },
+  ]);
 
   useEffect(() => {
     d3.csv(csvFile).then((csv) => {
