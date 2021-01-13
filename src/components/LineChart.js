@@ -40,6 +40,8 @@ function LineChart(props) {
               min: 0,
               max: "auto",
             }}
+            enableGridX={false}
+            enableGridY={false}
             axisTop={null}
             axisRight={null}
             axisBottom={{

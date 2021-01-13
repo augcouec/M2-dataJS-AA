@@ -35,6 +35,7 @@ function BarChart(props) {
             indexBy="country"
             margin={{ top: 30, right: 40, bottom: 45, left: 80 }}
             padding={0.3}
+            enableGridY={false}
             axisBottom={{
               tickSize: 0,
               tickPadding: 15,
