@@ -14,8 +14,7 @@ function BarChart(props) {
           .map((country) => ({
             country: country.label,
             spending: (country.total / 1000000000).toFixed(2),
-            color: props.selectedCountries.find((c) => c.code === country.code)
-              .color,
+            color: "#00b0a7",
           }))
       : [];
     setData(formattedData);

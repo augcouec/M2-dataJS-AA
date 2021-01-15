@@ -12,8 +12,6 @@ function LineChart(props) {
           )
           .map((country) => ({
             id: country.label,
-            color: props.selectedCountries.find((c) => c.code === country.code)
-              .color,
             data: country.expenses.map((expense) => ({
               x: expense.date,
               y: (expense.value / 1000000000).toFixed(2),
@@ -32,7 +30,6 @@ function LineChart(props) {
           </h2>
           <ResponsiveLine
             data={data}
-            colors={(d) => d.color}
             margin={{ top: 30, right: 160, bottom: 60, left: 80 }}
             xScale={{ type: "point" }}
             yScale={{

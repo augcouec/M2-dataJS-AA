@@ -89,7 +89,6 @@ function App() {
 
   const selectCountry = (event) => {
     if (!event.data) return;
-    const { color } = event;
     const countryCode = event.data.id;
     const matchingIndex = selectedCountries.findIndex(
       (country) => country.code === countryCode
@@ -102,7 +101,7 @@ function App() {
       const label = data.find((country) => country.code === countryCode).label;
       setSelectedCountries([
         ...selectedCountries,
-        { code: countryCode, color, label },
+        { code: countryCode, label },
       ]);
     }
   };
