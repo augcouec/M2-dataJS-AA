@@ -4,6 +4,7 @@ import GeoChartFeatures from "./GeoChartFeatures.json";
 function GeoChart(props) {
   const data = props.data
     .filter((country) => country.code !== "WLD")
+    .sort((a, b) => (a.average < b.average ? 1 : -1))
     .map((country) => ({
       id: country.code,
       value: Math.round(country.average / 1000000000),
@@ -19,13 +20,7 @@ function GeoChart(props) {
         onClick={props.updater}
         features={GeoChartFeatures.features}
         colors="nivo"
-        domain={[
-          0,
-          Math.max.apply(
-            Math,
-            data.map((d) => d.value)
-          ),
-        ]}
+        domain={[0, data[1].value]}
         label="properties.name"
         borderWidth={0.5}
         valueFormat=".2s"

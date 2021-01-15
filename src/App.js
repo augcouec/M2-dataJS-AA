@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import csvFile from "./data/military_expenditure.csv";
 import DatesRangeSlider from "./components/DatesRangeSlider";
 import TotalWorldExpense from "./components/TotalWorldExpense";
+import SelectedCountries from "./components/SelectedCountries";
 import GeoChart from "./components/GeoChart";
 import BarChart from "./components/BarChart";
 import LineChart from "./components/LineChart";
@@ -68,9 +69,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
-  const [selectedCountries, setSelectedCountries] = useState([
-    { code: "WLD", color: "grey" },
-  ]);
+  const [selectedCountries, setSelectedCountries] = useState([]);
 
   useEffect(() => {
     d3.csv(csvFile).then((csv) => {
@@ -100,9 +99,10 @@ function App() {
       selectedCountriesClone.splice(matchingIndex, 1);
       setSelectedCountries(selectedCountriesClone);
     } else {
+      const label = data.find((country) => country.code === countryCode).label;
       setSelectedCountries([
         ...selectedCountries,
-        { code: countryCode, color },
+        { code: countryCode, color, label },
       ]);
     }
   };
@@ -117,7 +117,10 @@ function App() {
             <DatesRangeSlider updater={updateDatesRange} />
             <TotalWorldExpense data={currentData} />
           </header>
-
+          <SelectedCountries
+            countries={selectedCountries}
+            updater={selectCountry}
+          />
           <main className="app__charts">
             <GeoChart data={currentData} updater={selectCountry} />
             <div className="app__charts__side-charts">

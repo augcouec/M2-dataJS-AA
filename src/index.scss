@@ -72,6 +72,28 @@ body {
   }
 }
 
+// SELECTED COUNTRIES ---------------------------------------------------------
+.selected-countries {
+  padding: 1rem 0;
+  color: white;
+
+  &__country {
+    display: inline-block;
+    border-radius: 1rem;
+    padding: 0.25rem 1rem;
+    margin: .5rem .25rem 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__cross {
+    margin-left: .5rem;
+    color: grey;
+  }
+}
+
 // CHARTS ---------------------------------------------------------------------
 .app__charts {
   display: flex;
@@ -101,13 +123,13 @@ body {
   }
 
   .geo-chart {
-    height: 75vh;
+    height: 65vh;
     width: calc(50% - 1rem);
     margin-right: 1rem;
   }
 
   &__side-charts {
-    height: 75vh;
+    height: 65vh;
     width: calc(50% - 1rem);
     margin-left: 1rem;
     display: flex;
