@@ -17,7 +17,7 @@ function DatesRangeSlider(props) {
         max={LAST_YEAR}
         defaultValue={[FIRST_YEAR, LAST_YEAR]}
         marks={marks}
-        onChange={(dates) => {
+        onAfterChange={(dates) => {
           setDatesRange(dates);
           props.updater(dates);
         }}
