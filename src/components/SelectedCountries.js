@@ -2,11 +2,7 @@ function SelectedCountries(props) {
   return (
     <div className="selected-countries">
       {props.countries.map((country, index) => (
-        <div
-          key={index}
-          className="selected-countries__country"
-          style={{ backgroundColor: country.color }}
-        >
+        <div key={index} className="selected-countries__country">
           {country.label}
           <span
             className="selected-countries__cross"
@@ -14,7 +10,7 @@ function SelectedCountries(props) {
               props.updater({ data: { id: country.code } });
             }}
           >
-            X
+            &#215;
           </span>
         </div>
       ))}
